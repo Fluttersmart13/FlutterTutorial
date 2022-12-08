@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_totorial/second_screen.dart';
+import 'package:flutter_totorial/third_screen.dart';
 
 void main() {
   /// main is the entry point of any programming language
   ///
-  runApp(MyApp());
+  runApp(MaterialApp(
+    home: MyApp(),
+  ));
 
   /// run app is use for root screen of any flutter project first screen
 }
@@ -14,72 +18,67 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text("Home"),
-          ),
-          body: Container(
-            color: Colors.red,
-            width: 300,
-            height: 300,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                  color: Colors.green,
-                  width: 60,
-                  height: 60,
-                  child: Text("t"),
-                ),
-                Container(
-                  width: 60,
-                  height: 60,
-                  color: Colors.black,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Container(
-                        width: 20,
-                        height: 20,
-                        color: Colors.grey,
-                      ),
-                      Container(
-                        width: 20,
-                        height: 20,
-                        color: Colors.pink,
-                      ),
-                      Container(
-                        width: 20,
-                        height: 20,
-                        color: Colors.grey,
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  width: 60,
-                  height: 60,
-                  color: Colors.yellow,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Container(
-                        height: 30,
-                        width: 30,
-                        color: Colors.blue,
-                      ),
-                      Container(
-                        height: 30,
-                        width: 30,
-                        color: Colors.brown,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Home"),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          getButton(context, "simple Alert", 1),
+          getButton(context, "two", 2),
+          getButton(context, "three", 3),
+        ],
+      ),
+    );
+  }
+
+  /// future is use for when any method take time in execution process
+  /// async - simultaneous calling a method
+  /// await - return value after some
+
+  _simpleAlertDialog() {
+    return SimpleDialog(
+      title: const Text('Select assignment'),
+      children: <Widget>[
+        SimpleDialogOption(
+          onPressed: () {},
+          child: const Text('Treasury department'),
+        ),
+        SimpleDialogOption(
+          onPressed: () {},
+          child: const Text('State department'),
+        ),
+      ],
+    );
+  }
+
+  Center getButton(BuildContext context, String name, int key) {
+    return Center(
+      child: InkWell(
+        onTap: () {
+          ///Navigator to open new activity
+
+          if (key == 1) {
+            _simpleAlertDialog();
+            // Navigator.push(context,
+            //     MaterialPageRoute(builder: (context) => FirstScreen()));
+          } else if (key == 2) {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => SecondScreen()));
+          } else if (key == 3) {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ThirdScreen()));
+          }
+        },
+        child: Container(
+          height: 50,
+          width: 100,
+          color: Colors.red,
+          child: Center(
+            child: Text(
+              name,
+              style: TextStyle(color: Colors.white),
             ),
           ),
         ),
@@ -87,3 +86,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+/// function and method are same and use for reuse the code
